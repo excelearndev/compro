@@ -3,7 +3,68 @@
 import Image from "next/image";
 import Link from "next/link";
 
+import { SocmedProps } from "@/types/socmed";
+
 import ContactBG from "@/assets/testimoni.jpg";
+import INSTAGRAM_ICON from "@/assets/icons/instagram-blue.svg";
+import FACEBOOK_ICON from "@/assets/icons/facebook-blue.svg";
+import DISCORD_ICON from "@/assets/icons/discord-blue.svg";
+import TIKTOK_ICON from "@/assets/icons/tiktok-blue.svg";
+import YOUTUBE_ICON from "@/assets/icons/youtube-blue.svg";
+import LINKEDIN_ICON from "@/assets/icons/linkedin-blue.svg";
+import TWITTER_ICON from "@/assets/icons/twitter-blue.svg";
+import WHATSAPP_ICON from "@/assets/icons/whatsapp-white.svg";
+import GMAIL_ICON from "@/assets/icons/gmail-white.svg";
+import LOCATION_ICON from "@/assets/icons/location-white.svg";
+
+const contact = [
+  {
+    icon: GMAIL_ICON,
+    label: "Excelearn@gmail.com",
+    url: "/",
+  },
+  {
+    icon: WHATSAPP_ICON,
+    label: "+62984201810",
+    url: "/",
+  },
+  {
+    icon: LOCATION_ICON,
+    label: "Equity Tower 26th Floor",
+    url: "/",
+  },
+];
+
+const socmed = [
+  {
+    icon: INSTAGRAM_ICON,
+    url: "/",
+  },
+  {
+    icon: FACEBOOK_ICON,
+    url: "/",
+  },
+  {
+    icon: DISCORD_ICON,
+    url: "/",
+  },
+  {
+    icon: TIKTOK_ICON,
+    url: "/",
+  },
+  {
+    icon: YOUTUBE_ICON,
+    url: "/",
+  },
+  {
+    icon: LINKEDIN_ICON,
+    url: "/",
+  },
+  {
+    icon: TWITTER_ICON,
+    url: "/",
+  },
+];
 
 export default function ContactList() {
   return (
@@ -15,16 +76,13 @@ export default function ContactList() {
             Get In Touch with us using the enquiry form of contact details below
           </p>
           <div className="flex flex-col items-start gap-3 mt-8">
-            {[
-              "Excelearn@gmail.com",
-              "+62984201810",
-              "Equity Tower 26th Floor",
-            ].map((each: string, index: number) => (
+            {contact.map((each: SocmedProps, index: number) => (
               <div
-                className="bg-gradient-to-r from-[#141A2E] to-[#76dbff] text-white p-5 rounded-full min-w-[40%]"
+                className="bg-gradient-to-r from-[#141A2E] to-[#76dbff] text-white p-5 rounded-full min-w-[45%] flex items-center gap-3"
                 key={index}
               >
-                {each}
+                <Image src={each.icon} alt={`socmed ${index}`} />
+                {each.label}
               </div>
             ))}
           </div>
@@ -42,8 +100,10 @@ export default function ContactList() {
       <div className="text-center space-y-5 py-[5%]">
         <h3 className="font-[600] text-[49px]">Follow Us</h3>
         <div className="flex items-center justify-center gap-8">
-          {[1, 2, 3, 4, 5, 6, 7].map((each: number) => (
-            <div key={each} className="w-[50px] h-[50px] bg-slate-200"></div>
+          {socmed?.map((each: SocmedProps, index: number) => (
+            <Link key={index} href={each.url}>
+              <Image src={each.icon} alt={`socmed ${index}`} />
+            </Link>
           ))}
         </div>
       </div>

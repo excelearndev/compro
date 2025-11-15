@@ -2,12 +2,14 @@
 
 import Button from "../atomic/button";
 
+import { ArrowRightFromLine } from "lucide-react";
+
 export default function Hero() {
   return (
     <div
       className="min-w-[99dvw] min-h-[100dvh] text-white flex items-center justify-start px-[10%]"
       style={{
-        backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('./hero.png')`,
+        backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('./hero.webp')`,
         backgroundSize: "cover",
         backgroundPosition: "center",
       }}
@@ -20,7 +22,11 @@ export default function Hero() {
           pretium sit non eu. Tempor platea congue suscipit iaculis tellus nibh
           sapien feugiat. Sagittis et nec amet laoreet morbi pretium.
         </p>
-        <Button label="Start Consultation" rounded />
+        <Button
+          label="Start Consultation"
+          rounded
+          icon={<ArrowRightFromLine size={18} />}
+        />
       </div>
       <div className="min-w-[50%]"></div>
     </div>

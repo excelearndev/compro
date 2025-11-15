@@ -1,62 +1,110 @@
 /** @format */
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect, useMemo } from "react";
 import Image from "next/image";
 
-import ServiceBG from "@/assets/hero.png";
+import ServiceBG from "@/assets/hero.webp";
+import IT_TRAINING_ICON from "@/assets/icons/it_training.svg";
+import IT_CONSULTANT_LOGO from "@/assets/icons/it_consultant.svg";
+import IT_SUPPORT_LOGO from "@/assets/icons/it_support.svg";
+import IT_TRAINING_DISABLE_ICON from "@/assets/icons/it_training_disable.svg";
+import IT_CONSULTANT_DISABLE_LOGO from "@/assets/icons/it_consultant_disable.svg";
+import IT_SUPPORT_DISABLE_LOGO from "@/assets/icons/it_support_disable.svg";
 
-interface ServiceProps {
-  key: string;
-  name: string;
-  description: string;
-}
+import { ServiceProps } from "@/types/service";
 
 const data = [
   {
-    key: "it_training",
+    key: "it-training",
     name: "IT Training",
     description:
       "ExceLEARN menyediakan pelatihan teknis terkini dalam berbagai bidang IT, dipimpin oleh instruktur ahli dengan pengalaman praktis. Kami juga menawarkan konsultasi karier dan layanan khusus perusahaan untuk memenuhi kebutuhan unik dari setiap peserta kursus dan klien kami.",
+    icon: IT_TRAINING_ICON,
+    icon_disable: IT_TRAINING_DISABLE_ICON,
   },
   {
-    key: "it_consultant",
+    key: "it-consultant",
     name: "IT Consultant",
     description:
       "ExceLEARN menyediakan pelatihan teknis terkini dalam berbagai bidang IT, dipimpin oleh instruktur ahli dengan pengalaman praktis. Kami juga menawarkan konsultasi karier dan layanan khusus perusahaan untuk memenuhi kebutuhan unik dari setiap peserta kursus dan klien kami.",
+    icon: IT_CONSULTANT_LOGO,
+    icon_disable: IT_CONSULTANT_DISABLE_LOGO,
   },
   {
-    key: "it_support",
+    key: "it-support",
     name: "IT Support",
     description:
       "ExceLEARN menyediakan pelatihan teknis terkini dalam berbagai bidang IT, dipimpin oleh instruktur ahli dengan pengalaman praktis. Kami juga menawarkan konsultasi karier dan layanan khusus perusahaan untuk memenuhi kebutuhan unik dari setiap peserta kursus dan klien kami.",
+    icon: IT_SUPPORT_LOGO,
+    icon_disable: IT_SUPPORT_DISABLE_LOGO,
   },
 ];
 
-export default function ServiceDetail() {
-  const [selected, setSelected] = useState(data[0]);
+interface ServiceDetailProps {
+  initialService?: string | null;
+}
+
+export default function ServiceDetail({ initialService }: ServiceDetailProps) {
+  const initialSelectedService = useMemo(() => {
+    if (initialService) {
+      const foundService = data.find(
+        (service) => service.key === initialService
+      );
+      return foundService || data[0];
+    }
+    return data[0];
+  }, [initialService]);
+
+  const [selected, setSelected] = useState<ServiceProps>(
+    initialSelectedService
+  );
+
+  useEffect(() => {
+    if (initialService) {
+      setTimeout(() => {
+        document
+          .getElementById("service-detail")
+          ?.scrollIntoView({ behavior: "smooth", block: "start" });
+      }, 100);
+    }
+  }, [initialService]);
 
   return (
-    <div className="pt-[5%] px-[10%] w-full">
-      <div className="space-x-8 border-b-2 border-slate-300 pb-3">
+    <div id="service-detail" className="pt-[5%] px-[10%] w-full">
+      <div className="space-x-8 border-b-2 border-slate-300 pb-3 flex">
         {data.map((each: ServiceProps) => (
-          <span
+          <div
             onClick={() => {
               setSelected(each);
             }}
             key={each.key}
-            className={`font-[600] text-[24px] cursor-pointer duration-150 ${
-              selected.key === each.key ? "text-black" : "text-slate-300"
-            }`}
+            className={`font-[600] text-[24px] cursor-pointer duration-150 flex gap-3 items-center transition-colors ${
+              selected.key === each.key ? "text-[#00AEEF]" : "text-slate-300"
+            } hover:text-[#00AEEF]/70`}
           >
+            <Image
+              src={
+                selected.key === each.key
+                  ? each.icon
+                  : each?.icon_disable
+                  ? each?.icon_disable
+                  : ""
+              }
+              alt={each.name}
+              height={20}
+              width={20}
+            />
             {each.name}
-          </span>
+          </div>
         ))}
       </div>
-      <div className="grid grid-cols-2 gap-8 mt-3">
+      <div className="grid grid-cols-2 gap-8 mt-8">
         <div className="flex flex-col justify-center">
           <h3 className="font-[600] text-[49px] mb-5">{selected.name}</h3>
-          <p className="text-[16px] text-justify">{selected.description}</p>
+          <p className="text-[16px] text-justify leading-relaxed">
+            {selected.description}
+          </p>
         </div>
         <div className="p-[10%]">
           <Image
@@ -64,7 +112,7 @@ export default function ServiceDetail() {
             alt="service pict"
             height={0}
             width={0}
-            className="rounded-lg shadow-[0px_0px_50px_5px_rgba(0,0,0,0.11)] block"
+            className="rounded-lg shadow-[0px_0px_50px_5px_rgba(0,0,0,0.11)] w-full h-auto"
           />
         </div>
       </div>

@@ -1,11 +1,15 @@
 /** @format */
 
 import type { Metadata } from "next";
+import { Suspense } from "react";
 
-import Navbar from "@/components/navbar";
+import { TanstackProvider } from "../lib/tanstack";
+
+import Navbar from "@/components/atomic/navbar";
+import Footer from "@/components/atomic/footer";
+import LoadingPage from "@/components/atomic/loading";
 
 import "@/styles/globals.css";
-import Footer from "@/components/footer";
 
 export const metadata: Metadata = {
   title: "Excelearn",
@@ -20,9 +24,13 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
-        <Navbar />
-        {children}
-        <Footer />
+        <Suspense fallback={<LoadingPage />}>
+          <TanstackProvider>
+            <Navbar />
+            {children}
+            <Footer />
+          </TanstackProvider>
+        </Suspense>
       </body>
     </html>
   );

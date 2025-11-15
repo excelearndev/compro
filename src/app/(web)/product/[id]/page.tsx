@@ -1,11 +1,58 @@
 /** @format */
 
+"use client";
+
+import { useParams } from "next/navigation";
+
 import Container from "@/components/atomic/container";
+import HeroProductDetail from "@/components/hero/heroproductdetail";
+import ProductList from "@/components/productlist";
+import WhyChoose from "@/components/whychoose";
+
+import { useProduct, useProductDetail } from "@/services/product/hook";
 
 export default function ProductDetail() {
+  const params = useParams();
+  const { id } = params;
+
+  const { data, isLoading } = useProductDetail({ id: id as string });
+  const { data: product = [], isLoading: productLoading } = useProduct({
+    product_category: data?.product_category,
+  });
+
   return (
     <Container>
-      <h1>Product Detail</h1>
+      <HeroProductDetail data={data} />
+      <div className="px-[10%] py-[5%] space-y-5 w-full">
+        <h3 className="text-[49px] font-[600]">Product Overview</h3>
+        <p>{data?.product_description}</p>
+      </div>
+      <div
+        style={{
+          backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('./hero.webp')`,
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+        }}
+      >
+        <div className="py-[5%] px-[15%] space-y-10">
+          <h4 className="text-[49px] text-center text-white font-[600]">
+            {"What You'll Learn"}
+          </h4>
+          <div className="grid grid-cols-4 gap-5">
+            {data?.benefits?.map((each: string, index: number) => (
+              <div
+                className="bg-white/50 backdrop-blur-md border border-white/20 shadow-xl p-5 rounded-3xl text-[24px] flex flex-col items-center gap-5"
+                key={index}
+              >
+                <span>{each}</span>
+                <div className="w-[50%] border" />
+              </div>
+            ))}
+          </div>
+        </div>
+        <WhyChoose type="light" />
+      </div>
+      <ProductList data={product} title="Related Product" />
     </Container>
   );
 }

@@ -1,0 +1,191 @@
+/** @format */
+"use client";
+
+import { useState } from "react";
+
+import dayjs, { Dayjs } from "dayjs";
+import { ChevronLeft, ChevronRight } from "lucide-react";
+
+import { ScheduleProps } from "@/types/schedule";
+
+interface CalendarProps {
+  onDateSelect?: (date: Dayjs | null) => void;
+  onMonthSelect?: (date: Dayjs) => void;
+  selectedDate?: Dayjs | null;
+  data?: ScheduleProps[];
+}
+
+export default function Calendar({
+  onDateSelect,
+  onMonthSelect,
+  selectedDate,
+  data = [],
+}: CalendarProps) {
+  const [currentMonth, setCurrentMonth] = useState(dayjs());
+
+  const startOfMonth = currentMonth.startOf("month");
+  const endOfMonth = currentMonth.endOf("month");
+  const startDate = startOfMonth.startOf("week");
+  const endDate = endOfMonth.endOf("week");
+
+  const daysInCalendar = [];
+  let day = startDate;
+
+  while (day.isBefore(endDate) || day.isSame(endDate, "day")) {
+    daysInCalendar.push(day);
+    day = day.add(1, "day");
+  }
+
+  const weeks: Dayjs[][] = [];
+  for (let i = 0; i < daysInCalendar.length; i += 7) {
+    weeks.push(daysInCalendar.slice(i, i + 7));
+  }
+
+  const handlePrevMonth = () => {
+    setCurrentMonth(currentMonth.subtract(1, "month"));
+    if (onMonthSelect) onMonthSelect(currentMonth.subtract(1, "month"));
+  };
+
+  const handleNextMonth = () => {
+    setCurrentMonth(currentMonth.add(1, "month"));
+    if (onMonthSelect) onMonthSelect(currentMonth.add(1, "month"));
+  };
+
+  const handleDateClick = (date: Dayjs) => {
+    if (onDateSelect) {
+      onDateSelect(date);
+    }
+  };
+
+  const getDateStatus = (date: Dayjs) => {
+    return data
+      .filter((each: ScheduleProps) => {
+        const eachDateStr = dayjs(each.schedule_date).format("YYYY-MM-DD");
+        const selectedDateStr = date.format("YYYY-MM-DD");
+
+        if (eachDateStr === selectedDateStr) return each;
+      })
+      .map((each: ScheduleProps) => {
+        const eachDateStr = dayjs(each.schedule_date).format("YYYY-MM-DD");
+        const today = dayjs().format("YYYY-MM-DD");
+
+        if (date.isBefore(dayjs(), "day")) {
+          return "ENDED";
+        } else if (eachDateStr === today) {
+          return "ON_GOING";
+        } else {
+          return each.status;
+        }
+      });
+  };
+
+  return (
+    <div className="bg-white rounded-3xl shadow-lg p-8 w-[70%] mx-auto space-y-10">
+      <div className="flex items-center justify-center gap-10">
+        <div className="flex items-center gap-2 text-sm">
+          <span className="w-3 h-3 rounded-full bg-green-500"></span>
+          <span>On Going</span>
+        </div>
+        <div className="flex items-center gap-2 text-sm">
+          <span className="w-3 h-3 rounded-full bg-yellow-300"></span>
+          <span>Open Seat</span>
+        </div>
+        <div className="flex items-center gap-2 text-sm">
+          <span className="w-3 h-3 rounded-full bg-red-500"></span>
+          <span>Full Booked</span>
+        </div>
+        <div className="flex items-center gap-2 text-sm">
+          <span className="w-3 h-3 rounded-full bg-gray-400"></span>
+          <span>Ended</span>
+        </div>
+      </div>
+
+      <div className="flex items-center justify-center gap-4">
+        <button
+          onClick={handlePrevMonth}
+          className="p-2 hover:bg-gray-100 rounded-full transition-colors"
+        >
+          <ChevronLeft className="w-6 h-6" />
+        </button>
+        <h3
+          className="text-2xl font-semibold min-w-[200px] text-center cursor-pointer"
+          onClick={() => onDateSelect && onDateSelect(null)}
+        >
+          {currentMonth.format("MMMM YYYY")}
+        </h3>
+        <button
+          onClick={handleNextMonth}
+          className="p-2 hover:bg-gray-100 rounded-full transition-colors"
+        >
+          <ChevronRight className="w-6 h-6" />
+        </button>
+      </div>
+
+      <div className="grid grid-cols-7 gap-2">
+        {["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"].map((day) => (
+          <div
+            key={day}
+            className="text-center font-semibold text-gray-700 py-2"
+          >
+            {day}
+          </div>
+        ))}
+
+        {weeks.map((week, weekIndex) =>
+          week.map((date, dateIndex) => {
+            const isCurrentMonth = date.month() === currentMonth.month();
+            const isToday = date.isSame(dayjs(), "day");
+            const isSelected = selectedDate && date.isSame(selectedDate, "day");
+            const status = getDateStatus(date);
+            return (
+              <div
+                key={`${weekIndex}-${dateIndex}`}
+                className="aspect-square flex flex-col items-center justify-center"
+              >
+                <button
+                  onClick={() => handleDateClick(date)}
+                  className={`
+                  text-sm transition-all p-3 rounded-full aspect-square cursor-pointer
+                  ${!isCurrentMonth ? "text-gray-300" : "text-gray-900"}
+                  ${isToday ? "font-bold bg-slate-50" : ""}
+                  ${isSelected ? "bg-[#ade9ff]" : ""}
+                  ${isCurrentMonth ? "hover:bg-gray-100" : ""}
+                `}
+                >
+                  {date.date()}
+                </button>
+                <div className="min-h-2 w-full mt-2 flex items-center justify-center">
+                  {status.length > 0 && (
+                    <div className="flex gap-1">
+                      {status?.map(
+                        (
+                          each:
+                            | "OPEN_SEAT"
+                            | "FULL_BOOKED"
+                            | "ENDED"
+                            | "ON_GOING",
+                          index: number
+                        ) => (
+                          <span
+                            key={index}
+                            className={`
+                       w-2 h-2 rounded-full block
+                      ${each === "ON_GOING" ? "bg-green-500" : ""}
+                      ${each === "OPEN_SEAT" ? "bg-yellow-300" : ""}
+                      ${each === "FULL_BOOKED" ? "bg-red-500" : ""}
+                      ${each === "ENDED" ? "bg-gray-400" : ""}
+                    `}
+                          ></span>
+                        )
+                      )}
+                    </div>
+                  )}
+                </div>
+              </div>
+            );
+          })
+        )}
+      </div>
+    </div>
+  );
+}

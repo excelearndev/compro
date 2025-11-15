@@ -1,17 +1,21 @@
 /** @format */
 
-export default function HeroSchedule() {
+"use client";
+
+import { ReactNode } from "react";
+
+export default function HeroSchedule({ children }: { children: ReactNode }) {
   return (
     <div
       className="min-w-[99dvw] min-h-[100dvh] text-white flex items-center justify-start px-[10%]"
       style={{
-        backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('./hero.png')`,
+        backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('./hero.webp')`,
         backgroundSize: "cover",
         backgroundPosition: "center",
       }}
     >
       <div className="flex flex-col gap-8 items-start">
-        <h1 className="text-[61px] font-[600]">Schecule</h1>
+        <h1 className="text-[61px] font-[600]">Schedule</h1>
         <p>
           ExceLEARN adalah penyedia layanan pelatihan bisnis dan IT terkemuka di
           bawah naungan PT. Bina Kinerja Nusantara. Kami berkomitmen untuk
@@ -19,6 +23,7 @@ export default function HeroSchedule() {
           berkomitmen membantu berbagai perusahaan meningkatkan keterampilan
           teknis dan produktivitas karyawannya.
         </p>
+        {children}
       </div>
     </div>
   );

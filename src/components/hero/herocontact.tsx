@@ -5,7 +5,7 @@ export default function HeroContact() {
     <div
       className="min-w-[99dvw] min-h-[100dvh] text-white flex items-center justify-start px-[10%]"
       style={{
-        backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('./hero.png')`,
+        backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('./hero.webp')`,
         backgroundSize: "cover",
         backgroundPosition: "center",
       }}

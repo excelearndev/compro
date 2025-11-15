@@ -1,20 +1,47 @@
 /** @format */
 
+"use client";
+
+import { ReactNode } from "react";
+
+const bgColor = {
+  primary: "bg-[#00AEEF]",
+  default: "bg-white",
+  disable: "bg-slate-300",
+};
+
+const textColor = {
+  primary: "text-white",
+  default: "text-black",
+  disable: "text-slate-500",
+};
+
 export default function Button({
   label,
   rounded = false,
+  type = "default",
+  icon,
+  onClick = () => {},
 }: {
   label: string;
   rounded?: boolean;
+  type?: "primary" | "default" | "disable";
+  icon?: ReactNode;
+  onClick?: () => void;
 }) {
   return (
     <button
-      className={`bg-white text-black  px-4 py-1 font-[600] cursor-pointer ${
+      onClick={() => onClick()}
+      className={`${textColor[type]} ${bgColor[type]} px-5 py-2 font-[600]  ${
         rounded ? "rounded-full" : "rounded-md"
+      } flex items-center gap-2 ${
+        type === "disable" ? "cursor-not-allowed" : "cursor-pointer"
       }`}
       type="button"
+      disabled={type === "disable"}
     >
       {label}
+      {icon && icon}
     </button>
   );
 }
