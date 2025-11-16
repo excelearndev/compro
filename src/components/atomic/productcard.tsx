@@ -30,7 +30,7 @@ export default function ProductCard({ data, size = "md" }: CompProps) {
         onClick={() => router.push(`/product/${data._id}`)}
         className="rounded-xl overflow-hidden shadow-[0px_0px_50px_5px_rgba(0,0,0,0.11)] cursor-pointer"
       >
-        <div className="h-48 bg-slate-100 overflow-hidden">
+        <div className="h-36 md:h-48 bg-slate-100 overflow-hidden">
           <Image
             src={data?.banner?.url || HeroBG}
             alt={data?.banner?.public_id || ""}
@@ -41,16 +41,16 @@ export default function ProductCard({ data, size = "md" }: CompProps) {
         </div>
 
         <div className="p-[5%]">
-          <div className="flex justify-between items-center pb-8 border-b-2 border-[#00AEEF]">
+          <div className="flex justify-between items-center pb-5 md:pb-8 border-b-2 border-[#00AEEF]">
             <Tooltip placement="top" title={data?.product_name || "-"}>
-              <h3 className="text-[24px] font-[600] truncate max-w-[65%]">
+              <h3 className="text-[16px] md:text-[20px] lg:text-[24px] font-[600] truncate max-w-[65%]">
                 {data?.product_name || "-"}
               </h3>
             </Tooltip>
 
             <Tag label={data?.product_category?.replace("_", " ") || "Unset"} />
           </div>
-          <div className="flex justify-between pt-3">
+          <div className="flex justify-between pt-2 md:pt-3">
             <div className="flex items-center gap-2">
               <span className="w-[25px] h-[25px] rounded-full bg-slate-200 block"></span>
               <span className="text-[12px]">Lara</span>
@@ -73,22 +73,23 @@ export default function ProductCard({ data, size = "md" }: CompProps) {
     );
   } else if (size === "lg") {
     return (
-      <div className="rounded-xl overflow-hidden shadow-[0px_0px_50px_5px_rgba(0,0,0,0.11)] grid grid-cols-4 w-full">
+      <div className="rounded-xl overflow-hidden shadow-[0px_0px_50px_5px_rgba(0,0,0,0.11)] grid grid-cols-1 md:grid-cols-4 w-full">
         <div
+          className="h-48 md:h-auto"
           style={{
             backgroundImage: `url(${data?.banner?.url || "./hero.webp"})`,
             backgroundSize: "cover",
             backgroundPosition: "center",
           }}
         ></div>
-        <div className="col-span-3">
-          <div className="flex flex-col justify-between items-start p-8 gap-2">
+        <div className="md:col-span-3">
+          <div className="flex flex-col justify-between items-start p-5 md:p-8 gap-2">
             <Tag label={data?.product_category?.replace("_", " ") || "Unset"} />
-            <h3 className="text-[24px] font-[600]">
+            <h3 className="text-[18px] md:text-[20px] lg:text-[24px] font-[600]">
               {data?.product_name || "-"}
             </h3>
-            <p className="text-left">{data?.product_description || "-"}</p>
-            <div className="flex justify-between w-full mt-8 items-center">
+            <p className="text-left text-sm md:text-base">{data?.product_description || "-"}</p>
+            <div className="flex flex-col md:flex-row justify-between w-full mt-5 md:mt-8 items-start md:items-center gap-3 md:gap-0">
               <div className="space-y-3">
                 <div className="flex items-center gap-2">
                   <span className="w-[25px] h-[25px] rounded-full bg-slate-200 block"></span>

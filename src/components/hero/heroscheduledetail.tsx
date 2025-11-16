@@ -20,32 +20,32 @@ import { ScheduleProps } from "@/types/schedule";
 export default function HeroScheduleDetail({ data }: { data?: ScheduleProps }) {
   return (
     <div
-      className="min-w-[99dvw] min-h-[100dvh] text-white flex items-center justify-start px-[10%]"
+      className="min-w-[99dvw] min-h-[100dvh] text-white flex items-center justify-start px-[5%] md:px-[7%] lg:px-[10%]"
       style={{
         backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.5), rgba(255,255,255)), url('./hero.webp')`,
         backgroundSize: "cover",
         backgroundPosition: "center",
       }}
     >
-      <div className="flex flex-col gap-8 items-start bg-white/50 backdrop-blur-md border border-white/20 text-black rounded-lg w-full p-[5%] mt-[10%]">
-        <div className="flex justify-between items-center w-full">
-          <h1 className="text-[49px] font-[600]">{data?.schedule_name}</h1>
+      <div className="flex flex-col gap-5 md:gap-8 items-start bg-white/50 backdrop-blur-md border border-white/20 text-black rounded-lg w-full p-[5%] md:p-[5%] mt-[10%]">
+        <div className="flex flex-col md:flex-row justify-between items-start md:items-center w-full gap-3 md:gap-0">
+          <h1 className="text-[28px] md:text-[40px] lg:text-[49px] font-[600]">{data?.schedule_name}</h1>
           <Button label="Register Now" rounded type="primary" />
         </div>
         <div
-          className="rounded-2xl w-full min-h-[450px] grid grid-cols-3 p-10"
+          className="rounded-2xl w-full min-h-[250px] md:min-h-[450px] grid grid-cols-1 md:grid-cols-3 p-5 md:p-10"
           style={{
             backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('${data?.banner?.url}')`,
             backgroundSize: "cover",
             backgroundPosition: "center",
           }}
         >
-          <div className="col-span-2"></div>
+          <div className="hidden md:block md:col-span-2"></div>
           <div>
-            <div className="bg-white/80 backdrop-blur-md border border-white/20 shadow-xl p-8 rounded-3xl space-y-3">
-              <h5 className="font-[500] text-[24px]">Course Feature</h5>
+            <div className="bg-white/80 backdrop-blur-md border border-white/20 shadow-xl p-5 md:p-8 rounded-3xl space-y-3">
+              <h5 className="font-[500] text-[18px] md:text-[24px]">Course Feature</h5>
               <div className="grid grid-cols-2 border-t border-[#00AEEF] pt-3">
-                <div className="flex flex-col gap-2 font-[300]">
+                <div className="flex flex-col gap-2 font-[300] text-xs md:text-sm">
                   <span className="flex items-center gap-2">
                     <CornerRightUp size={14} color="#00AEEF" />
                     Skill Level
@@ -67,7 +67,7 @@ export default function HeroScheduleDetail({ data }: { data?: ScheduleProps }) {
                     Certification
                   </span>
                 </div>
-                <div className="flex flex-col gap-2 font-[400]">
+                <div className="flex flex-col gap-2 font-[400] text-xs md:text-sm">
                   <span className="capitalize">
                     {data?.skill_level?.toLowerCase().replace("_", " ") || "-"}
                   </span>
@@ -82,28 +82,28 @@ export default function HeroScheduleDetail({ data }: { data?: ScheduleProps }) {
             </div>
           </div>
         </div>
-        <div className="grid grid-cols-3 gap-5 mt-[-10%] px-[3%]">
-          <div className="flex bg-white/80 backdrop-blur-md border border-white/20 shadow-xl rounded-xl p-5 gap-4">
-            <Clock size={34} color="#00AEEF" />
-            <div className="flex flex-col">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-3 md:gap-5 mt-[-5%] md:mt-[-10%] px-[3%]">
+          <div className="flex bg-white/80 backdrop-blur-md border border-white/20 shadow-xl rounded-xl p-4 md:p-5 gap-3 md:gap-4">
+            <Clock size={28} className="md:w-[34px] md:h-[34px]" color="#00AEEF" />
+            <div className="flex flex-col text-sm md:text-base">
               <span className="font-[600]">Start</span>
-              <span>{data?.schedule_start || "-"} WIB</span>
-              <span>{dayjs(data?.schedule_date).format("DD MMM YYYY")}</span>
+              <span className="text-xs md:text-sm">{data?.schedule_start || "-"} WIB</span>
+              <span className="text-xs md:text-sm">{dayjs(data?.schedule_date).format("DD MMM YYYY")}</span>
             </div>
           </div>
-          <div className="flex bg-white/80 backdrop-blur-md border border-white/20 shadow-xl rounded-xl p-5 gap-4">
-            <CircleCheckBig size={34} color="#00AEEF" />
-            <div className="flex flex-col">
+          <div className="flex bg-white/80 backdrop-blur-md border border-white/20 shadow-xl rounded-xl p-4 md:p-5 gap-3 md:gap-4">
+            <CircleCheckBig size={28} className="md:w-[34px] md:h-[34px]" color="#00AEEF" />
+            <div className="flex flex-col text-sm md:text-base">
               <span className="font-[600]">End</span>
-              <span>{data?.schedule_end || "-"} WIB</span>
-              <span>{dayjs(data?.schedule_date).format("DD MMM YYYY")}</span>
+              <span className="text-xs md:text-sm">{data?.schedule_end || "-"} WIB</span>
+              <span className="text-xs md:text-sm">{dayjs(data?.schedule_date).format("DD MMM YYYY")}</span>
             </div>
           </div>
-          <div className="flex bg-white/80 backdrop-blur-md border border-white/20 shadow-xl rounded-xl p-5 gap-4">
-            <MapPin size={34} color="#00AEEF" />
-            <div className="flex flex-col">
+          <div className="flex bg-white/80 backdrop-blur-md border border-white/20 shadow-xl rounded-xl p-4 md:p-5 gap-3 md:gap-4">
+            <MapPin size={28} className="md:w-[34px] md:h-[34px]" color="#00AEEF" />
+            <div className="flex flex-col text-sm md:text-base">
               <span className="font-[600]">Location</span>
-              <span>{data?.location || "-"}</span>
+              <span className="text-xs md:text-sm">{data?.location || "-"}</span>
             </div>
           </div>
         </div>

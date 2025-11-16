@@ -37,9 +37,9 @@ export default function ServiceList() {
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
 
   return (
-    <div className="px-[10%] py-[5%] text-center w-full space-y-10 min-h-[90dvh]">
-      <h2 className="font-[600] text-[49px]">Services</h2>
-      <div className="flex justify-evenly gap-6">
+    <div className="px-[5%] md:px-[7%] lg:px-[10%] py-[5%] text-center w-full space-y-6 md:space-y-10 min-h-[50dvh] md:min-h-[90dvh]">
+      <h2 className="font-[600] text-[32px] md:text-[40px] lg:text-[49px]">Services</h2>
+      <div className="flex flex-col md:flex-row justify-evenly gap-4 md:gap-6">
         {services.map((each: ServiceProps, index: number) => (
           <Link
             key={index}
@@ -49,14 +49,14 @@ export default function ServiceList() {
             onMouseLeave={() => setHoveredIndex(null)}
           >
             <div
-              className={`w-full rounded-3xl p-8 flex flex-col items-center justify-center gap-5 min-h-[350px] transition-all duration-500 relative ${
+              className={`w-full rounded-3xl p-5 md:p-8 flex flex-col items-center justify-center gap-3 md:gap-5 min-h-[250px] md:min-h-[350px] transition-all duration-500 relative ${
                 hoveredIndex === index
                   ? "bg-gradient-to-br from-[#1a3a52] via-[#0d4d6b] to-[#00AEEF]"
                   : "bg-white border-gray-200"
               }`}
             >
               <div
-                className={`w-[120px] h-[120px] rounded-2xl flex items-center justify-center transition-all duration-500 ${
+                className={`w-[80px] h-[80px] md:w-[120px] md:h-[120px] rounded-2xl flex items-center justify-center transition-all duration-500 ${
                   hoveredIndex === index
                     ? "bg-white/10 backdrop-blur-sm"
                     : "bg-transparent"
@@ -65,8 +65,9 @@ export default function ServiceList() {
                 <Image
                   src={each.icon}
                   alt={`${each.name} logo`}
-                  width={80}
-                  height={80}
+                  width={60}
+                  height={60}
+                  className="md:w-[80px] md:h-[80px]"
                   className={`transition-all duration-500 ${
                     hoveredIndex === index ? "brightness-0 invert" : ""
                   }`}
@@ -74,7 +75,7 @@ export default function ServiceList() {
               </div>
 
               <h3
-                className={`text-[24px] font-[600] transition-all duration-500 ${
+                className={`text-[18px] md:text-[24px] font-[600] transition-all duration-500 ${
                   hoveredIndex === index ? "text-white" : "text-black"
                 }`}
               >
@@ -82,7 +83,7 @@ export default function ServiceList() {
               </h3>
 
               <p
-                className={`text-[14px] font-[400] leading-relaxed transition-all duration-500 ${
+                className={`text-[12px] md:text-[14px] font-[400] leading-relaxed transition-all duration-500 ${
                   hoveredIndex === index
                     ? "text-white opacity-100 max-h-[200px]"
                     : "text-transparent opacity-0 max-h-0"

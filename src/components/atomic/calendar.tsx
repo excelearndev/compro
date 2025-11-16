@@ -80,52 +80,52 @@ export default function Calendar({
   };
 
   return (
-    <div className="bg-white rounded-3xl shadow-lg p-8 w-[70%] mx-auto space-y-10">
-      <div className="flex items-center justify-center gap-10">
-        <div className="flex items-center gap-2 text-sm">
+    <div className="bg-white rounded-3xl shadow-lg p-5 md:p-8 w-full md:w-[85%] lg:w-[70%] mx-auto space-y-6 md:space-y-10">
+      <div className="flex items-center justify-center gap-4 md:gap-10 flex-wrap">
+        <div className="flex items-center gap-2 text-xs md:text-sm">
           <span className="w-3 h-3 rounded-full bg-green-500"></span>
           <span>On Going</span>
         </div>
-        <div className="flex items-center gap-2 text-sm">
+        <div className="flex items-center gap-2 text-xs md:text-sm">
           <span className="w-3 h-3 rounded-full bg-yellow-300"></span>
           <span>Open Seat</span>
         </div>
-        <div className="flex items-center gap-2 text-sm">
+        <div className="flex items-center gap-2 text-xs md:text-sm">
           <span className="w-3 h-3 rounded-full bg-red-500"></span>
           <span>Full Booked</span>
         </div>
-        <div className="flex items-center gap-2 text-sm">
+        <div className="flex items-center gap-2 text-xs md:text-sm">
           <span className="w-3 h-3 rounded-full bg-gray-400"></span>
           <span>Ended</span>
         </div>
       </div>
 
-      <div className="flex items-center justify-center gap-4">
+      <div className="flex items-center justify-center gap-2 md:gap-4">
         <button
           onClick={handlePrevMonth}
-          className="p-2 hover:bg-gray-100 rounded-full transition-colors"
+          className="p-1 md:p-2 hover:bg-gray-100 rounded-full transition-colors"
         >
-          <ChevronLeft className="w-6 h-6" />
+          <ChevronLeft className="w-5 h-5 md:w-6 md:h-6" />
         </button>
         <h3
-          className="text-2xl font-semibold min-w-[200px] text-center cursor-pointer"
+          className="text-lg md:text-2xl font-semibold min-w-[150px] md:min-w-[200px] text-center cursor-pointer"
           onClick={() => onDateSelect && onDateSelect(null)}
         >
           {currentMonth.format("MMMM YYYY")}
         </h3>
         <button
           onClick={handleNextMonth}
-          className="p-2 hover:bg-gray-100 rounded-full transition-colors"
+          className="p-1 md:p-2 hover:bg-gray-100 rounded-full transition-colors"
         >
-          <ChevronRight className="w-6 h-6" />
+          <ChevronRight className="w-5 h-5 md:w-6 md:h-6" />
         </button>
       </div>
 
-      <div className="grid grid-cols-7 gap-2">
+      <div className="grid grid-cols-7 gap-1 md:gap-2">
         {["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"].map((day) => (
           <div
             key={day}
-            className="text-center font-semibold text-gray-700 py-2"
+            className="text-center font-semibold text-gray-700 py-1 md:py-2 text-xs md:text-sm"
           >
             {day}
           </div>
@@ -145,7 +145,7 @@ export default function Calendar({
                 <button
                   onClick={() => handleDateClick(date)}
                   className={`
-                  text-sm transition-all p-3 rounded-full aspect-square cursor-pointer
+                  text-xs md:text-sm transition-all p-2 md:p-3 rounded-full aspect-square cursor-pointer
                   ${!isCurrentMonth ? "text-gray-300" : "text-gray-900"}
                   ${isToday ? "font-bold bg-slate-50" : ""}
                   ${isSelected ? "bg-[#ade9ff]" : ""}
@@ -154,9 +154,9 @@ export default function Calendar({
                 >
                   {date.date()}
                 </button>
-                <div className="min-h-2 w-full mt-2 flex items-center justify-center">
+                <div className="min-h-2 w-full mt-1 md:mt-2 flex items-center justify-center">
                   {status.length > 0 && (
-                    <div className="flex gap-1">
+                    <div className="flex gap-0.5 md:gap-1">
                       {status?.map(
                         (
                           each:
@@ -169,7 +169,7 @@ export default function Calendar({
                           <span
                             key={index}
                             className={`
-                       w-2 h-2 rounded-full block
+                       w-1.5 h-1.5 md:w-2 md:h-2 rounded-full block
                       ${each === "ON_GOING" ? "bg-green-500" : ""}
                       ${each === "OPEN_SEAT" ? "bg-yellow-300" : ""}
                       ${each === "FULL_BOOKED" ? "bg-red-500" : ""}

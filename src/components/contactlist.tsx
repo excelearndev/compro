@@ -68,17 +68,17 @@ const socmed = [
 
 export default function ContactList() {
   return (
-    <div className="w-full px-[10%] py-[5%] space-y-10">
-      <div className="grid grid-cols-2">
+    <div className="w-full px-[5%] md:px-[7%] lg:px-[10%] py-[5%] space-y-6 md:space-y-10">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-0">
         <div>
-          <h3 className="text-[49px] font-[600]">Lets Talk!</h3>
-          <p className="max-w-[50%]">
+          <h3 className="text-[32px] md:text-[40px] lg:text-[49px] font-[600]">Lets Talk!</h3>
+          <p className="max-w-full md:max-w-[70%] lg:max-w-[50%] text-sm md:text-base">
             Get In Touch with us using the enquiry form of contact details below
           </p>
-          <div className="flex flex-col items-start gap-3 mt-8">
+          <div className="flex flex-col items-start gap-3 mt-5 md:mt-8">
             {contact.map((each: SocmedProps, index: number) => (
               <div
-                className="bg-gradient-to-r from-[#141A2E] to-[#76dbff] text-white p-5 rounded-full min-w-[45%] flex items-center gap-3"
+                className="bg-gradient-to-r from-[#141A2E] to-[#76dbff] text-white p-4 md:p-5 rounded-full w-full md:min-w-[45%] md:w-auto flex items-center gap-3 text-sm md:text-base"
                 key={index}
               >
                 <Image src={each.icon} alt={`socmed ${index}`} />
@@ -87,19 +87,19 @@ export default function ContactList() {
             ))}
           </div>
         </div>
-        <div className="flex items-center justify-end">
+        <div className="flex items-center justify-center md:justify-end">
           <Image
             src={ContactBG}
             alt="contact bg"
-            height={350}
-            width={350}
-            className="rounded-lg"
+            height={250}
+            width={250}
+            className="rounded-lg md:h-[300px] md:w-[300px] lg:h-[350px] lg:w-[350px]"
           />
         </div>
       </div>
-      <div className="text-center space-y-5 py-[5%]">
-        <h3 className="font-[600] text-[49px]">Follow Us</h3>
-        <div className="flex items-center justify-center gap-8">
+      <div className="text-center space-y-4 md:space-y-5 py-[5%]">
+        <h3 className="font-[600] text-[32px] md:text-[40px] lg:text-[49px]">Follow Us</h3>
+        <div className="flex items-center justify-center gap-4 md:gap-8 flex-wrap">
           {socmed?.map((each: SocmedProps, index: number) => (
             <Link key={index} href={each.url}>
               <Image src={each.icon} alt={`socmed ${index}`} />

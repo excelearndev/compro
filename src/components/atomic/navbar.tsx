@@ -45,16 +45,16 @@ export default function Navbar() {
     <nav className="sticky top-0 left-0 right-0 z-50">
       <div className="bg-red-500">{promo && <Promo data={promo} />}</div>
       <div
-        className={`flex justify-between text-white items-center px-[10%] transition-all duration-300 ${
+        className={`flex justify-between text-white items-center px-[5%] md:px-[7%] lg:px-[10%] transition-all duration-300 ${
           isScrolled
             ? "bg-[#00AEEF] shadow-lg backdrop-blur-md"
             : "bg-transparent"
         }`}
       >
         <Link href="/">
-          <Image src={Logo} alt="logo" width={150} height={50} />
+          <Image src={Logo} alt="logo" width={100} height={33} className="md:w-[120px] lg:w-[150px] h-auto" />
         </Link>
-        <div className="space-x-10 py-5 flex items-center">
+        <div className="space-x-3 md:space-x-6 lg:space-x-10 py-3 md:py-4 lg:py-5 flex items-center text-xs md:text-sm lg:text-base">
           <Link href="/" className="hover:text-gray-200 transition-colors">
             Home
           </Link>

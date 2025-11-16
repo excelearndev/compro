@@ -39,20 +39,20 @@ function ScheduleCard({ data }: { data: ScheduleProps }) {
 
   return (
     <div
-      className={`bg-white p-6 border-l-4 flex items-center justify-between border-l ${borderColor[status]}`}
+      className={`bg-white p-4 md:p-6 border-l-4 flex flex-col md:flex-row items-start md:items-center justify-between border-l gap-3 md:gap-0 ${borderColor[status]}`}
     >
       <div className="flex-1">
-        <h4 className="text-xl font-semibold mb-3">
+        <h4 className="text-lg md:text-xl font-semibold mb-2 md:mb-3">
           {data?.schedule_name || "-"}
         </h4>
-        <div className="flex items-center gap-2 text-sm text-gray-600">
-          <Users className="w-4 h-4 text-[#00AEEF]" />
+        <div className="flex items-center gap-2 text-xs md:text-sm text-gray-600">
+          <Users className="w-4 h-4 md:w-4 md:h-4 text-[#00AEEF]" />
           <span>{data?.quota || "-"}</span>
         </div>
       </div>
-      <div className="flex flex-col items-end gap-3">
-        <div className="flex items-center gap-2 text-sm text-gray-600">
-          <Clock className="w-4 h-4 text-[#00AEEF]" />
+      <div className="flex flex-col md:items-end gap-2 md:gap-3 w-full md:w-auto">
+        <div className="flex items-center gap-2 text-xs md:text-sm text-gray-600">
+          <Clock className="w-4 h-4 md:w-4 md:h-4 text-[#00AEEF]" />
           <span>
             {data?.schedule_start} - {data?.schedule_end} WIB
           </span>
@@ -97,33 +97,33 @@ export default function SelectedSchedule({
   }
 
   return (
-    <div className="w-full px-[10%] py-[5%]">
+    <div className="w-full px-[5%] md:px-[7%] lg:px-[10%] py-[5%]">
       {is_search && showDate.length > 0 ? (
         <>
-          <div className="flex items-center justify-center gap-10 mb-10">
-            <div className="flex items-center gap-2 text-sm">
+          <div className="flex items-center justify-center gap-4 md:gap-10 mb-6 md:mb-10 flex-wrap">
+            <div className="flex items-center gap-2 text-xs md:text-sm">
               <span className="w-3 h-3 rounded-full bg-green-500"></span>
               <span>On Going</span>
             </div>
-            <div className="flex items-center gap-2 text-sm">
+            <div className="flex items-center gap-2 text-xs md:text-sm">
               <span className="w-3 h-3 rounded-full bg-yellow-300"></span>
               <span>Open Seat</span>
             </div>
-            <div className="flex items-center gap-2 text-sm">
+            <div className="flex items-center gap-2 text-xs md:text-sm">
               <span className="w-3 h-3 rounded-full bg-red-500"></span>
               <span>Full Booked</span>
             </div>
           </div>
           {showDate?.map((each: string) => (
             <>
-              <div key={each} className="mb-8">
-                <div className="flex items-center gap-3 mb-6">
-                  <Calendar className="w-6 h-6 text-[#00AEEF]" />
-                  <h3 className="text-2xl font-[600]">
+              <div key={each} className="mb-6 md:mb-8">
+                <div className="flex items-center gap-2 md:gap-3 mb-4 md:mb-6">
+                  <Calendar className="w-5 h-5 md:w-6 md:h-6 text-[#00AEEF]" />
+                  <h3 className="text-lg md:text-2xl font-[600]">
                     {dayjs(`${each}`, "YYYY-MM-DD").format("DD MMMM YYYY")}
                   </h3>
                 </div>
-                <div className="space-y-4">
+                <div className="space-y-3 md:space-y-4">
                   {showData
                     .filter(
                       (schedule: ScheduleProps) =>
@@ -140,9 +140,9 @@ export default function SelectedSchedule({
         </>
       ) : (
         <>
-          <div className="flex items-center gap-3 mb-6">
-            <Calendar className="w-6 h-6 text-[#00AEEF]" />
-            <h3 className="text-2xl font-[600]">
+          <div className="flex items-center gap-2 md:gap-3 mb-4 md:mb-6">
+            <Calendar className="w-5 h-5 md:w-6 md:h-6 text-[#00AEEF]" />
+            <h3 className="text-lg md:text-2xl font-[600]">
               {selectedDate
                 ? dayjs(selectedDate).format("dddd, DD MMMM YYYY")
                 : dayjs(selectedMonth).format("MMMM YYYY")}
@@ -154,8 +154,8 @@ export default function SelectedSchedule({
                 <ScheduleCard key={index} data={each} />
               ))
             ) : (
-              <div className="bg-slate-50 flex flex-col items-center p-[5%] rounded-3xl gap-5">
-                <CalendarOff color="gray" size={48} />
+              <div className="bg-slate-50 flex flex-col items-center p-[8%] md:p-[5%] rounded-3xl gap-4 md:gap-5">
+                <CalendarOff color="gray" size={36} className="md:w-[48px] md:h-[48px]" />
                 <span className="font-[400] text-slate-500">
                   No Schedule Found
                 </span>

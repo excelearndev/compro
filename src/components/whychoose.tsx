@@ -26,10 +26,10 @@ export default function WhyChoose({ type = "dark" }: { type?: string }) {
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
 
   return (
-    <div className="px-[10%] min-w-[99dvw] py-[5%] flex items-center gap-20 duration-300 min-h-[80dvh]">
-      <div>
+    <div className="px-[5%] md:px-[7%] lg:px-[10%] min-w-[99dvw] py-[5%] flex flex-col md:flex-row items-center gap-8 md:gap-12 lg:gap-20 duration-300 min-h-[50dvh] md:min-h-[80dvh]">
+      <div className="w-full md:w-auto text-center md:text-left">
         <h2
-          className={`text-[61px] font-[600] leading-[1] ${
+          className={`text-[40px] md:text-[50px] lg:text-[61px] font-[600] leading-[1] ${
             type === "light" ? "text-white" : "text-black"
           }`}
         >
@@ -43,7 +43,7 @@ export default function WhyChoose({ type = "dark" }: { type?: string }) {
       <div className="flex flex-col gap-3 flex-1">
         {whyChooseData.map((each, index: number) => (
           <div
-            className={`flex gap-5 bg-white/50 backdrop-blur-md border border-white/20 rounded-3xl px-5 py-3 items-stretch shadow-[0px_0px_50px_5px_rgba(0,0,0,0.11)] transition-all duration-300 cursor-pointer ${
+            className={`flex gap-3 md:gap-5 bg-white/50 backdrop-blur-md border border-white/20 rounded-2xl md:rounded-3xl px-4 md:px-5 py-3 items-stretch shadow-[0px_0px_50px_5px_rgba(0,0,0,0.11)] transition-all duration-300 cursor-pointer ${
               hoveredIndex === index ? "bg-white/80" : ""
             }`}
             key={index}
@@ -52,19 +52,19 @@ export default function WhyChoose({ type = "dark" }: { type?: string }) {
           >
             <div>
               <div
-                className={`flex items-center justify-center text-[24px] font-[600] border-2 rounded-full flex-shrink-0 ${
+                className={`flex items-center justify-center text-[18px] md:text-[24px] font-[600] border-2 rounded-full flex-shrink-0 ${
                   type === "light"
                     ? "border-black text-black"
                     : "border-[#00AEEF] text-[#00AEEF]"
-                } h-[50px] aspect-square`}
+                } h-[40px] md:h-[50px] aspect-square`}
               >
                 {index + 1}
               </div>
             </div>
             <div className="flex-1 flex justify-center flex-col">
-              <span className="text-[24px] font-[600] block">{each.title}</span>
+              <span className="text-[16px] md:text-[20px] lg:text-[24px] font-[600] block">{each.title}</span>
               <p
-                className={`text-[16px] font-[400] text-gray-700 overflow-hidden transition-all duration-300 ${
+                className={`text-[12px] md:text-[14px] lg:text-[16px] font-[400] text-gray-700 overflow-hidden transition-all duration-300 ${
                   hoveredIndex === index
                     ? "max-h-[200px] opacity-100 mt-2"
                     : "max-h-0 opacity-0"

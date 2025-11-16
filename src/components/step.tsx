@@ -2,7 +2,7 @@
 
 export default function Step() {
   return (
-    <div className="w-full px-[10%] pt-[5%]">
+    <div className="w-full px-[5%] md:px-[7%] lg:px-[10%] pt-[5%]">
       <div
         className="text-white rounded-4xl"
         style={{
@@ -12,25 +12,25 @@ export default function Step() {
         }}
       >
         <div className="px-[4%] py-[2.5%]">
-          <h2 className="text-[49px] font-[600]">Join in 4 Easy Steps</h2>
-          <p>
+          <h2 className="text-[28px] md:text-[40px] lg:text-[49px] font-[600]">Join in 4 Easy Steps</h2>
+          <p className="text-sm md:text-base">
             We’ve simplified the process so you can focus on what matters:
             learning.
           </p>
         </div>
-        <div className="bg-white text-black border-x border-b border-[#00AEEF] rounded-b-4xl flex justify-between py-[5%]">
+        <div className="bg-white text-black border-x border-b border-[#00AEEF] rounded-b-4xl flex flex-col md:flex-row justify-between py-[5%] gap-5 md:gap-0">
           {[1, 2, 3, 4].map((each: number, index: number) => (
             <div
               className={`flex flex-col items-start gap-3 px-[5%] ${
-                index > 0 ? "border-l" : ""
-              } border-[#00AEEF]`}
+                index > 0 ? "md:border-l border-t md:border-t-0" : ""
+              } border-[#00AEEF] pt-5 md:pt-0`}
               key={each}
             >
-              <span className="text-[35px] font-[600] text-[#00AEEF] border rounded-full w-[50px] h-[50px] flex items-center justify-center">
+              <span className="text-[28px] md:text-[35px] font-[600] text-[#00AEEF] border rounded-full w-[40px] h-[40px] md:w-[50px] md:h-[50px] flex items-center justify-center">
                 {each}
               </span>
-              <h4 className="text-[24px]">Join in 5 Easy Steps</h4>
-              <p>
+              <h4 className="text-[18px] md:text-[24px]">Join in 5 Easy Steps</h4>
+              <p className="text-sm md:text-base">
                 We’ve simplified the process so you can focus on what matters:
                 learning.
               </p>
